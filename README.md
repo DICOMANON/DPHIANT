@@ -10,6 +10,9 @@
 
 <p align="center">
   DICOManon is a plugin to anonymize dicom files.
+</p> 
+<p align="center">
+  🚧 This project is under developement 🚧
 </p>
 
 ## Table of Contents
