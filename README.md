@@ -19,10 +19,17 @@
 
 - [Documentation](#documentation)
 - [License](#license)
+- [Contributors](#contributors)
 
-# Documentation
+### Documentation
 
 Find the full documentation for this project at here.
 
-## License
+### License
 We haven't got a license yet...
+
+### Contributors
+ - [Ben Wilson](https://github.com/benmwilson)
+ - [Nigam Lad](https://github.com/NigamLad)
+ - [Yidu Guo](https://github.com/yiduguo-hp)
+ 
