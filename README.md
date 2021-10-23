@@ -18,7 +18,7 @@
 - [License](#license)
 - [Contributors](#contributors)
 
-## Documentation
+### Documentation
 
 Find the full documentation for this project at here.
 
