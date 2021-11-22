@@ -1,15 +1,18 @@
 <p align="center">
-  <img src="https://i.imgur.com/HIdf89W.png" alt="logo" width="20%"/>
+<!--   <img src="" alt="logo" width="20%"/> -->
 </p>
 <h1 align="center">
-  DICOManon
+  DPHIANT
 </h1>
+<h3 align="center"><i>
+  "DICOM Personal Health Information Anonymization Tool"
+  </i></h3>
 <p align="center">
   
 </p>
 
 <p align="center">
-  DICOManon is a plugin to anonymize dicom files.
+  DPHIANT is a plugin to anonymize the personal health information contained inside DICOM files.
 </p> 
 <p align="center">
   🚧 This project (and the readme) is under developement 🚧
@@ -29,9 +32,9 @@
 ### Clone
 For prerequisites and detailed build instructions please read the [Installation](#install) instructions. Once the dependencies are installed, run:
 ```bash
-# clone dicomanon repo
-git clone https://github.com/benmwilson/dicomanon.git
-cd dicomanon
+# clone dphiant repo
+git clone https://github.com/dicomanon/dphiant.git
+cd dphiant
 ```
 
 #### Dependencies
