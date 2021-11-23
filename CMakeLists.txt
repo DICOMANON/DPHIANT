@@ -31,14 +31,12 @@ set(LIBRARY_NAME cpplib)
 
 include(FetchContent)
 
-
 # Where any include files are
 include_directories(src/lib)
 
 # Subdirectories to build
 add_subdirectory(src/lib)
 add_subdirectory(src/tests)
-
 
 # Name of executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})

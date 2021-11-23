@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 # Project name
-project(cppstarter)
+project(DPHIANT)
 
 # Build for C++20 if we can
 set(CMAKE_CXX_STANDARD 20)
@@ -31,24 +31,12 @@ set(LIBRARY_NAME cpplib)
 
 include(FetchContent)
 
-# Downloading abseil package
-FetchContent_Declare(
-  abseil
-  URL https://github.com/abseil/abseil-cpp/archive/master.zip)
-FetchContent_Populate(abseil)
-message(STATUS "abseil is available in " ${abseil_SOURCE_DIR})
-
-
 # Where any include files are
 include_directories(src/lib)
 
 # Subdirectories to build
 add_subdirectory(src/lib)
 add_subdirectory(src/tests)
-add_subdirectory(${abseil_SOURCE_DIR})
-add_subdirectory(src/abseil_demo)
-add_subdirectory(src/abseil_flags)
-
 
 # Name of executable
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
