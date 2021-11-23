@@ -1,0 +1,17 @@
+[
+{
+  "directory": "X:/GitHub/DPHIANT/build",
+  "command": "C:\\PROGRA~2\\MINGW-~1\\I686-8~1.0-P\\mingw32\\bin\\I686-W~2.EXE  @CMakeFiles/DPHIANT.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\DPHIANT.dir\\src\\main\\main.cpp.obj -c X:\\GitHub\\DPHIANT\\src\\main\\main.cpp",
+  "file": "X:/GitHub/DPHIANT/src/main/main.cpp"
+},
+{
+  "directory": "X:/GitHub/DPHIANT/build/src/lib",
+  "command": "C:\\PROGRA~2\\MINGW-~1\\I686-8~1.0-P\\mingw32\\bin\\I686-W~2.EXE  @CMakeFiles/cpplib.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\cpplib.dir\\cpplib.cpp.obj -c X:\\GitHub\\DPHIANT\\src\\lib\\cpplib.cpp",
+  "file": "X:/GitHub/DPHIANT/src/lib/cpplib.cpp"
+},
+{
+  "directory": "X:/GitHub/DPHIANT/build/src/tests",
+  "command": "C:\\PROGRA~2\\MINGW-~1\\I686-8~1.0-P\\mingw32\\bin\\I686-W~2.EXE  @CMakeFiles/tests.dir/includes_CXX.rsp -g -std=gnu++2a -o CMakeFiles\\tests.dir\\tests.cpp.obj -c X:\\GitHub\\DPHIANT\\src\\tests\\tests.cpp",
+  "file": "X:/GitHub/DPHIANT/src/tests/tests.cpp"
+}
+]
