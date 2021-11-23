@@ -17,11 +17,17 @@ jobs:
           command: 'apt-get update && sudo apt-get install -y cmake'
       - run:
           name: Build with CMake
-          command: |
-          mkdir build
-          cd build
-          cmake ..
-          make
+          command: 'mkdir build'
+      - run:
+          name: Enter build
+          command: 'cd build'
+      - run:
+          name: cmake
+          command: 'cmake ..'
+      - run:
+          name: make with CMake
+          command: 'make'
+
       - run:
           name: Run  tests
           command: |
