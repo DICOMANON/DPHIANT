@@ -42,6 +42,22 @@ cd dphiant
 
 To start the setup, type: `docker-compose up --build`
 
+Once started up:
+
+LOGIN/PASSWORD = demo/demo
+
+Orthanc Modality simulation: [http://localhost:8044](http://localhost:8044)
+- Upload a DICOM image
+- Open the study and select 'send to modality', select 'middleman'
+
+Orthanc Middleman simulation: [http://localhost:8043](http://localhost:8043)
+- Middleman serves as a temporary buffer to modify the images and for de-identification
+- Automatically sends image to Orthanc PACS
+- No interaction is needed here
+
+Orthanc PACS simulation: [http://localhost:8042](http://localhost:8042)
+- View the modified DICOM image sent from Middleman server
+
 #### Dependencies
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum, sapien quis efficitur eleifend, magna velit scelerisque est, ut porttitor augue ante non lectus. Curabitur.
 
