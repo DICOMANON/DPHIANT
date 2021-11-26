@@ -22,6 +22,7 @@
 - [Getting Started](#getting-started)
 - [Clone](#clone)
     - [Dependencies](#dependencies)
+- [Setup](#setup)
 - [Documentation](#documentation)
 - [Install](#install)
 - [Usage](#usage)
@@ -36,6 +37,10 @@ For prerequisites and detailed build instructions please read the [Installation]
 git clone https://github.com/dicomanon/dphiant.git
 cd dphiant
 ```
+
+### Setup
+
+To start the setup, type: `docker-compose up --build`
 
 #### Dependencies
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum, sapien quis efficitur eleifend, magna velit scelerisque est, ut porttitor augue ante non lectus. Curabitur.
