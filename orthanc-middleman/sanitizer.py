@@ -2,6 +2,9 @@ from multiprocessing import Pool, Queue, Process
 import json
 import threading
 import requests
+import uuid
+import names
+import random
 
 
 class Sanitizer:
@@ -52,11 +55,19 @@ class Sanitizer:
     orthancApi = requests.Session()
     orthancApi.headers.update({"Authorization": self.authorizationToken})
     
-    try: 
+    try:
+      #
+      namesList = []
+      for i in range(10):
+        namesList.append(names.get_full_name())
+        
+
       # download a modified version of the instance
       modifyBody = {
         "Replace" : {
-          "InstitutionName": "DPHIANT"
+          "InstitutionName": "DPHIANT",
+          "PatientName":namesList[random.randint(0,9)],
+          "PatientID":str(uuid.uuid4())
         },
         "Keep": ["SOPInstanceUID"],
         "Force": True  # because we want to replace/keep the SOPInstanceUID
