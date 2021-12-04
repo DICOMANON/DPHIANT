@@ -40,9 +40,10 @@ cd dphiant
 
 ### Setup
 
-To start the setup, type: `docker-compose up --build`
+To start the setup, type: `docker-compose up --build` in your project path.
+This will begin to install the various images and dependencies required to run the Orthanc servers through Docker.
 
-Once started up:
+Once the three Orthanc servers have started up, use the details below to login.
 
 LOGIN/PASSWORD = demo/demo
 
