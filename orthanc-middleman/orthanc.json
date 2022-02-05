@@ -5,7 +5,7 @@
     },
     "DicomAet": "MIDDLEMAN",
     "DicomModalities": {
-        "pacs": ["PACS", "orthanc-pacs", 4242], // to perform query-retrieve on the PACS
+        "pacs": ["PACS", "orthanc-pacs", 4242],
         "modality": ["MODALITY", "orthanc-modality", 4242]
     },
     "PythonScript": "/python/sanitize.py",
