@@ -8,7 +8,7 @@ from doc import InspectOrthancModule
 from sanitizer import Sanitizer
 
 # uncomment to show the Orthanc Module functions/classes/enums
-InspectOrthancModule()
+# InspectOrthancModule()
 
 authorizationToken = orthanc.GenerateRestApiAuthorizationToken()
 
