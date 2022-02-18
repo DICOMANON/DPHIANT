@@ -60,29 +60,29 @@ class Sanitizer:
             print(patientInfo)
 
             # download a modified version of the instance
-            # modifyBody = {
-            #     "Replace": {
-            #         "InstitutionName": "DPHIANT",
-            #         "PatientName": patientInfo[0],
-            #         "PatientID": str(uuid.uuid4()),
-            #         "PatientBirthDate": patientInfo[1],
-            #         "PatientSex": patientInfo[2]
-            #     },
-            #     "Keep": ["SOPInstanceUID"],
-            #     "Force": True  # because we want to replace/keep the SOPInstanceUID
-            # }
-
             modifyBody = {
                 "Replace": {
                     "InstitutionName": "DPHIANT",
-                    "PatientName": "Emily Bailey",
-                    "PatientID": "ca7c2935-60eb-4743-acc6-41dc79b912cf",
-                    "PatientBirthDate": "19801220",
-                    "PatientSex": "F"
+                    "PatientName": patientInfo[0],
+                    "PatientID": str(uuid.uuid4()),
+                    "PatientBirthDate": patientInfo[1],
+                    "PatientSex": patientInfo[2]
                 },
                 "Keep": ["SOPInstanceUID"],
                 "Force": True  # because we want to replace/keep the SOPInstanceUID
             }
+
+            # modifyBody = {
+            #     "Replace": {
+            #         "InstitutionName": "DPHIANT",
+            #         "PatientName": "Emily Bailey",
+            #         "PatientID": "ca7c2935-60eb-4743-acc6-41dc79b912cf",
+            #         "PatientBirthDate": "19801220",
+            #         "PatientSex": "F"
+            #     },
+            #     "Keep": ["SOPInstanceUID"],
+            #     "Force": True  # because we want to replace/keep the SOPInstanceUID
+            # }
 
             # print(json.dumps(modifyBody))
             modifyRequest = orthancApi.post(url="http://localhost:8042/instances/" + instanceId + "/modify",
