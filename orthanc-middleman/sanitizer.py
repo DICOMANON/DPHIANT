@@ -52,8 +52,9 @@ class Sanitizer:
         # we are not in the Orthanc main process so we can't use the orthanc python module,
         # we have to use requests to access Orthanc from the external API
         orthancApi = requests.Session()
-        # instanceId="669cc709-5e58bdb2-0f8652a0-a2a91ef0-1f3e2e18"
-        url = "http://localhost:8044/instances/" + instanceId + "/content/0010-0010"
+        getTags = ['0010-0010', '0010-0020', '0010-0030', '0010-0040']
+        url = "http://localhost:8042/instances/" + instanceId + "/content/0010-0010"
+        print("Query URL:", url)
         page = orthancApi.get(url, auth=('demo', 'demo'))
         print(page.text)
 
