@@ -8,7 +8,7 @@ client = MongoClient(
 )
 
 server_info = client.server_info()
-print (server_info)
+# print (server_info)
 
 databases = client.list_database_names()
 print("Databases:", databases)
