@@ -20,10 +20,10 @@
 
 ### Table of Contents
 - [Getting Started](#getting-started)
-- [Clone](#clone)
+  - [Clone](#clone)
+  - [Setup](#setup)
     - [Dependencies](#dependencies)
-- [Setup](#setup)
-- [Documentation](#documentation)
+  - [Documentation](#documentation)
 - [Install](#install)
 - [Usage](#usage)
 - [License](#license)
@@ -58,6 +58,35 @@ Orthanc Middleman simulation: [http://localhost:8043](http://localhost:8043)
 
 Orthanc PACS simulation: [http://localhost:8042](http://localhost:8042)
 - View the modified DICOM image sent from Middleman server
+
+Mongo Express: [http://localhost:8081](http://localhost:8081)
+- View the MongoDB database via the Mongo Express browser interface
+
+Mongo Database:
+- Use this sample to access MongoDB programatically within the container
+```
+from pymongo import MongoClient
+
+client = MongoClient(
+            host = 'mongodb://mongo:27017',
+            serverSelectionTimeoutMS = 3000,
+            username="root",
+            password="example",
+)
+```
+
+- Use this sample to access MongoDB programatically from outside the container
+```
+from pymongo import MongoClient
+
+client = MongoClient(
+            host = 'mongodb://localhost:27017/',
+            serverSelectionTimeoutMS = 3000,
+            username="root",
+            password="example",
+)
+```
+
 
 #### Dependencies
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum, sapien quis efficitur eleifend, magna velit scelerisque est, ut porttitor augue ante non lectus. Curabitur.
