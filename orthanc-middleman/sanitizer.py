@@ -6,6 +6,7 @@ import uuid
 import names
 import random
 import datetime
+from pymongo import MongoClient
 
 
 class Sanitizer:
@@ -49,41 +50,69 @@ class Sanitizer:
     def modifyInstance(self, instanceId: str):
         print("processing instance " + instanceId)
 
+        # Initialize MongoDB client
+        client = MongoClient(
+            host = 'mongodb://mongo:27017', # <-- IP and port go here
+            serverSelectionTimeoutMS = 3000, # 3 second timeout
+            username="root",
+            password="example",
+        )
+        db = client["PHICrossTable"]
+        collection = db["PatientHealthInformation"]
+
         # we are not in the Orthanc main process so we can't use the orthanc python module,
         # we have to use requests to access Orthanc from the external API
         orthancApi = requests.Session()
         orthancApi.headers.update({"Authorization": self.authorizationToken})
+        
+        #List of Personal Health Information Tags to retrieve
+        getTags = ['0010-0010', '0010-0020', '0010-0030', '0010-0040']
+        tagNames = ["PatientName", "PatientID", "PatientBirthDate", "PatientSex"]
+        originalPHI = {}
+        for tag, tagName in zip(getTags, tagNames):
+            url = "http://localhost:8042/instances/" + instanceId + "/content/" + tag
+            page = orthancApi.get(url, auth=('demo', 'demo'))
+            originalPHI[tagName] = page.text
 
-        try:
-            # Generate random patient info
-            patientInfo = self.generateRandomPatientInfo()
-            print(patientInfo)
+        print("Original PHI:", originalPHI)
+        
 
-            # download a modified version of the instance
+        patientExists = self.checkIfPatientExists(originalPHI, client, db, collection)
+        print("PatientExists: ", patientExists)
+
+        newPHI = []
+        modifyBody = {}
+
+        if(patientExists):
+            newPHI = self.getPatientInfo(originalPHI, client, db, collection)
             modifyBody = {
                 "Replace": {
                     "InstitutionName": "DPHIANT",
-                    "PatientName": patientInfo[0],
-                    "PatientID": str(uuid.uuid4()),
-                    "PatientBirthDate": patientInfo[1],
-                    "PatientSex": patientInfo[2]
+                    "PatientName": newPHI["PatientName"],
+                    "PatientID": newPHI["PatientID"],
+                    "PatientBirthDate": newPHI["PatientBirthDate"],
+                    "PatientSex": newPHI["PatientSex"]
+                },
+                "Keep": ["SOPInstanceUID"],
+                "Force": True  # because we want to replace/keep the SOPInstanceUID
+            }
+        else:
+            newPHI = self.anonymizePatientInfo(originalPHI)
+            self.saveToDatabase(newPHI, client, db, collection)
+            modifyBody = {
+                "Replace": {
+                    "InstitutionName": "DPHIANT",
+                    "PatientName": newPHI["aliasPatientName"],
+                    "PatientID": newPHI["aliasPatientID"],
+                    "PatientBirthDate": newPHI["aliasPatientBirthDate"],
+                    "PatientSex": newPHI["PatientSex"]
                 },
                 "Keep": ["SOPInstanceUID"],
                 "Force": True  # because we want to replace/keep the SOPInstanceUID
             }
 
-            # modifyBody = {
-            #     "Replace": {
-            #         "InstitutionName": "DPHIANT",
-            #         "PatientName": "Emily Bailey",
-            #         "PatientID": "ca7c2935-60eb-4743-acc6-41dc79b912cf",
-            #         "PatientBirthDate": "19801220",
-            #         "PatientSex": "F"
-            #     },
-            #     "Keep": ["SOPInstanceUID"],
-            #     "Force": True  # because we want to replace/keep the SOPInstanceUID
-            # }
 
+        try:
             # print(json.dumps(modifyBody))
             modifyRequest = orthancApi.post(url="http://localhost:8042/instances/" + instanceId + "/modify",
                                             data=json.dumps(modifyBody))
@@ -116,7 +145,7 @@ class Sanitizer:
             self.retryInstanceLater(instanceId, 10.0)
 
     def generateRandomPatientInfo(self):
-        name = "l"
+        name = ""
         genderList = ["M", "F", "O"]
         randomGender = random.choices(genderList)[0]
         
@@ -139,6 +168,55 @@ class Sanitizer:
                 dayRange = random.randint(1,31)
         
         return [name, dicomDate, randomGender]
+
+    def anonymizePatientInfo(self, originalPHI):
+        # aliasPatientName is randomly generated based on original PatientSex
+        # aliaspatientID is a new UUID
+        # aliasPatientBirthDate is binned down to its year
+
+        aliasPatientName = ""
+        aliasPatientID = str(uuid.uuid4())
+        aliasPatientBirthDate = originalPHI["PatientBirthDate"][:4] + "0101"
+
+        if(originalPHI["PatientSex"].strip() == "O"):
+            aliasPatientName = names.get_full_name()
+        elif(originalPHI["PatientSex"].strip() == "F"):
+            aliasPatientName = names.get_full_name(gender="female")
+        else:
+            aliasPatientName = names.get_full_name(gender="male")
+
+        originalPHI["aliasPatientName"] = aliasPatientName
+        originalPHI["aliasPatientID"] = aliasPatientID
+        originalPHI["aliasPatientBirthDate"] = aliasPatientBirthDate
+        
+        return originalPHI
+
+    def saveToDatabase(self, PHI, client:MongoClient, db, collection):
+        collection.insert_one(PHI)
+
+    def checkIfPatientExists(self, originalPHI, client:MongoClient, db, collection):
+        document = list(collection.find(originalPHI))
+        print("Checking if patient exists")
+        print(originalPHI)
+        print(list(document))
+        if(len(document) == 0):
+            return False
+        else:
+            return True
+
+    def getPatientInfo(self, PHI, client:MongoClient, db, collection):
+        document = list(collection.find(PHI))
+        patientRow = document[0]
+
+        aliasPHI = {
+            "PatientName":patientRow["aliasPatientName"],
+            "PatientID":patientRow["aliasPatientID"],
+            "PatientBirthDate":patientRow["aliasPatientBirthDate"],
+            "PatientSex":patientRow["PatientSex"]
+        }
+
+        return aliasPHI
+
 
 
 def worker(workerName: str, sanitizer: Sanitizer):
