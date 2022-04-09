@@ -1,0 +1,15 @@
+{
+  "Name": "dphiant-pacs",
+	"RemoteAccessAllowed" : true,
+	"AuthenticationEnabled" : true,
+	"RegisteredUsers" : {
+		"demo": "demo"
+	},
+
+  "OverwriteInstances": true,
+  "DicomAet": "PACS",
+  "DicomModalities": {
+      "middleman": ["MIDDLEMAN", "dphiant-middleman", 4242], // used when pushing images to modality
+      "modality": ["MODALITY", "dphiant-modality", 4242]     // used when the modality performs a query-retrieve on the pacs
+  }
+}
