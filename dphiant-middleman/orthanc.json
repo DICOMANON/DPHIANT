@@ -1,0 +1,14 @@
+{
+    "Name": "dphiant-middleman",
+    "RegisteredUsers": {
+        "demo": "demo"
+    },
+    "DicomAet": "MIDDLEMAN",
+    "DicomModalities": {
+        "pacs": ["PACS", "dphiant-pacs", 4242], // to perform query-retrieve on the PACS
+        "modality": ["MODALITY", "dphiant-modality", 4242]
+    },
+    "PythonScript": "/python/sanitize.py",
+    "OverwriteInstances": true,
+    "IngestTranscoding": "1.2.840.10008.1.2.4.90"
+}

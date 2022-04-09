@@ -1,0 +1,39 @@
+version: "2"
+
+services:
+  
+  dphiant-pacs:
+    build: dphiant-pacs
+    restart: unless-stopped
+    ports: [ "8042:8042" ]
+  
+  dphiant-middleman:
+    build: dphiant-middleman
+    restart: unless-stopped
+    ports: [ "8043:8042" ]
+  
+  dphiant-modality:
+    build: dphiant-modality
+    restart: unless-stopped
+    ports: [ "8044:8042" ]
+  
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+            - mongo
