@@ -17,9 +17,9 @@
 
 ### Table of Contents
 - [Getting Started](#getting-started)
-  - [Clone](#clone)
-  - [Setup](#setup)
-  - [Documentation](#documentation)
+- [Clone](#clone)
+- [Setup](#setup)
+- [Documentation](#documentation)
 - [Install](#install)
 - [Usage](#usage)
 - [License](#license)
