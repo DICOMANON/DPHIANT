@@ -20,9 +20,6 @@
 - [Clone](#clone)
 - [Setup](#setup)
 - [Documentation](#documentation)
-- [Install](#install)
-- [Usage](#usage)
-- [License](#license)
 - [Contributors](#contributors)
 
 ## Getting Started
