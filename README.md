@@ -93,7 +93,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum, sapien qui
 
 ### Documentation
 Find our project's documentation files [here](Documentation/).  
-You can find the Orthanc project [here](https://www.orthanc-server.com/).
+You can view the Orthanc project [here](https://www.orthanc-server.com/).
 
 ## Install
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rutrum, sapien quis efficitur eleifend, magna velit scelerisque est, ut porttitor augue ante non lectus. Curabitur.
