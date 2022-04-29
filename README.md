@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://i.imgur.com/BuSnzG8.png" alt="logo" width="20%"/>
+</p>
 <h1 align="center">
   DPHIANT
 </h1>
